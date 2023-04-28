@@ -1,0 +1,29 @@
+name: 'my CV'
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: awalsh128/cache-apt-pkgs-action@latest
+              with:
+                  packages: wkhtmltopdf
+                  version: 1.0
+
+            - name: Build
+              run: wkhtmltopdf --enable-local-file-access index.html resume.pdf
+
+            - name: Deploy
+              uses: peaceiris/actions-gh-pages@v3
+              with:
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
+                  publish_dir: ./
+                  enable_jekyll: false
+                  allow_empty_commit: false
+                  force_orphan: true
+                  publish_branch: gh-pages
