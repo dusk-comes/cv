@@ -16,7 +16,7 @@ jobs:
                   version: 1.0
 
             - name: Build
-              run: wkhtmltopdf --enable-local-file-access index.html ay.kolesov.qa.load.pdf
+              run: wkhtmltopdf --enable-local-file-access index.html au.kolesov.qa.load.pdf
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
